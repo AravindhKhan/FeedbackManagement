@@ -1,0 +1,40 @@
+<form [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="feedbackType">Feedback Type</label>
+      <div class="row" *ngFor="let feedback of feedbackTypeList;let i = index">
+        <label for="feedback{{i}}">
+          <input type="radio" name="feedbackType" [value]="feedback" id="feedback{{i}}" formControlName="feedbackType">{{feedback}}
+        </label>
+      </div>
+  </div>
+  <div>
+      <div *ngFor="let answer of answerTypeList;let i = index">
+       <label>
+         <input type="checkbox" [value]="answer" (change)="onCheckChange($event)">
+         {{answer}}
+       </label>
+      </div>
+  </div>
+  <div formGroupName="questionAndAnswerList">
+   <div class="form-group">
+     <label for="question">Question</label>
+     <input type="text" name="question" formControlName="question">
+   </div>
+  <button type="button" (click)="onAddAnswer()">Add Answer</button>
+  <!-- <div *ngFor="let count of feedbackForm.get('questionAndAnswerList.answerList').controls;let i = index">
+      <input type="text" name="answerList" [formArrayName]="i" id="answerList{{i}}">
+      <button type="button" (click)="onDelete(i)">Delete</button>
+    </div> -->
+  </div>
+  <div>
+      <div *ngFor="let count of feedbackForm.get('country').controls;let i = index">
+          <input type="text" name="country" [formControlName]="i" id="country{{i}}">
+          <button type="button" (click)="onDelete(i)">Delete</button>
+        </div>
+  </div>
+  <div class="row">
+    <button class="btn-btn-success" type="submit">Save</button>
+    <button type="button">Cancel</button>
+    <button type="Delete">Delete</button>
+  </div>
+</form>
